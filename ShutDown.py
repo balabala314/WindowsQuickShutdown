@@ -4,7 +4,7 @@ def getDPI():
     src = r"Control Panel\Desktop\WindowMetrics"
     value = "AppliedDPI"
     try:
-        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, src)  # 只读
+        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, src)  # readonly
         if key:
             a = winreg.QueryValueEx(key, value)
             winreg.CloseKey(key)
@@ -14,7 +14,7 @@ def getDPI():
 OPERATION = None
 TIME = 0
 try :
-    DPI = ctypes.windll.shcore.GetScaleFactorForMonitor(0)
+    DPI = ctypes.windll.shcore.GetScaleFactorForDevice(0) / 100
 except :
     DPI = getDPI()
 try:
